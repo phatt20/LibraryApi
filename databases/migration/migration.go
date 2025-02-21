@@ -12,13 +12,12 @@ func main() {
 	db := databases.NewPostgresDatabase(&conf.Database)
 
 	tx := db.Connect().Begin()
-
-	customerMigration(tx)
 	adminMigration(tx)
+	customerMigration(tx)
 	bookMigration(tx)
+	purchaseHistoryMigration(tx)
 	customerCoinMigration(tx)
 	borrowRecordMigration(tx)
-	purchaseHistoryMigration(tx)
 
 	if err := tx.Commit().Error; err != nil {
 		tx.Rollback()
@@ -31,7 +30,7 @@ func customerMigration(tx *gorm.DB) {
 }
 
 func adminMigration(tx *gorm.DB) {
-	tx.Migrator().CreateTable(&entities.Admin{})
+	tx.Migrator().CreateTable(&entities.Admin{})	
 }
 
 func bookMigration(tx *gorm.DB) {

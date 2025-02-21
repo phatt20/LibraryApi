@@ -1,12 +1,17 @@
 package model
 
+import (
+	enum "github.com/phatt20/LibraryApi/enum"
+)
+
 type (
 	Book struct {
-		ID          uint64 `json:"id"`
-		Name        string `json:"name"`
-		Description string `json:"description"`
-		Picture     string `json:"picture"`
-		Price       uint   `json:"price"`
+		ID          uint64          `json:"id"`
+		Name        string          `json:"name"`
+		Description string          `json:"description"`
+		Picture     string          `json:"picture"`
+		Price       uint            `json:"price"`
+		Status      enum.BookStatus `json:"Status"`
 	}
 
 	BookFilter struct {
@@ -19,7 +24,7 @@ type (
 		Size int64 `query:"size" validate:"required,min=1,max=20"`
 	}
 
-	ItemResult struct {
+	BookResult struct {
 		Books    []*Book        `json:"books"`
 		Paginate PaginateResult `json:"paginate"`
 	}

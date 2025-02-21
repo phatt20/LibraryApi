@@ -39,3 +39,33 @@ func (r *BookRepositoryImpl) Listing(itemFilter *__bookModel.BookFilter) ([]*ent
 	}
 	return book, nil
 }
+
+func (r *BookRepositoryImpl) Counting(itemFilter *__bookModel.BookFilter) (int64, error) {
+	query := r.db.Connect().Model(entities.Book{}).Where("Status = ?", enum.StatusAvailable)
+
+	if itemFilter != nil {
+		if itemFilter.Name != "" {
+			query = query.Where("name ILIKE ?", "%"+itemFilter.Name+"%")
+		}
+		if itemFilter.Description != "" {
+			query = query.Where("description ILIKE ?", "%"+itemFilter.Description+"%")
+		}
+	}
+	var count int64
+
+	if err := query.Count(&count).Error; err != nil {
+		r.Logger.Errorf("Failed to Counting Books: %s", err.Error(), err.Error())
+		return -1, &_bookException.ItemCounting{}
+	}
+	return count, nil
+}
+
+func (r *BookRepositoryImpl) FindByID(bookID uint64) (*entities.Book, error) {
+	item := new(entities.Book)
+	if err := r.db.Connect().First(item, bookID).Error; err != nil {
+		r.Logger.Errorf("failed to find book by ID")
+		return nil, &_bookException.ItemNotFound{}
+	}
+
+	return item, nil
+}
