@@ -14,7 +14,7 @@ type BookManagingRepositoryImpl struct {
 	Logger echo.Logger
 }
 
-func NewBookManagingImpl(db databases.Databases, Logger echo.Logger) BookManagingRepository {
+func NewBookManagingRepositoryImpl(db databases.Databases, Logger echo.Logger) BookManagingRepository {
 	return &BookManagingRepositoryImpl{db, Logger}
 }
 
