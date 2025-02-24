@@ -6,8 +6,8 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/phatt20/LibraryApi/enum"
-	_bookManagingService "github.com/phatt20/LibraryApi/pkg/bookManaging/Service"
 	_bookManagingModel "github.com/phatt20/LibraryApi/pkg/bookManaging/model"
+	_bookManagingService "github.com/phatt20/LibraryApi/pkg/bookManaging/serviceBook"
 	"github.com/phatt20/LibraryApi/pkg/custom"
 )
 
