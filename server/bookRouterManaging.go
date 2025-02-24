@@ -14,8 +14,8 @@ func (s *echoServer) initBookRouterManaging() {
 	bookManagingService := _service.NewBookManagingServiceImpl(bookManagingRepository, bookRepository)
 	bookManagingController := _controller.NewBookManagingControllerImpl(bookManagingService)
 
-	router.PATCH("ChangingStatus", bookManagingController.ChangeStatus)
-	router.POST("Creating", bookManagingController.Creating)
-	router.PATCH("Editing", bookManagingController.Editing)
+	router.PATCH("/ChangingStatus/:bookID", bookManagingController.ChangeStatus)
+	router.PATCH("/Editing/:bookID", bookManagingController.Editing) //อย่าลืมทำ params
+	router.POST("/Creating", bookManagingController.Creating)
 
 }

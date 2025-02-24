@@ -63,18 +63,18 @@ func (c *BookManagingControllerImpl) ChangeStatus(pctx echo.Context) error {
 	}
 	customEchoRequest := custom.NewCustomEchoRequest(pctx)
 
-	if err := customEchoRequest.Bind(req); err != nil {
+	if err := customEchoRequest.Bind(&req); err != nil { // เปลี่ยนเป็น pointer
 		return custom.Error(pctx, http.StatusBadRequest, err.Error())
 	}
+
 	if err := c.bookManagingService.ChangeStatus(bookID, req.Status); err != nil {
 		return custom.Error(pctx, http.StatusInternalServerError, err.Error())
 	}
 	return pctx.NoContent(http.StatusNoContent)
-
 }
 
 func (c *BookManagingControllerImpl) getBookID(pctx echo.Context) (uint64, error) {
-	bookID := pctx.Param("BookID")
+	bookID := pctx.Param("bookID")
 	BookIDint64, err := strconv.ParseUint(bookID, 10, 64)
 	if err != nil {
 		return 0, err
