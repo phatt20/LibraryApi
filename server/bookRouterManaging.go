@@ -4,7 +4,7 @@ import (
 	_Bookrepository "github.com/phatt20/LibraryApi/pkg/book/repository"
 	_controller "github.com/phatt20/LibraryApi/pkg/bookManaging/controller"
 	_repository "github.com/phatt20/LibraryApi/pkg/bookManaging/repository"
-	_service "github.com/phatt20/LibraryApi/pkg/bookManaging/service"
+	_service "github.com/phatt20/LibraryApi/pkg/bookManaging/serviceBook"
 )
 
 func (s *echoServer) initBookRouterManaging() {
